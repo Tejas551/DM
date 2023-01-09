@@ -1,0 +1,63 @@
+1
+import pandas as pd
+import numpy as np
+
+2
+df = pd.read_csv("Iris.csv")
+
+3
+
+df.isnull().sum()
+
+4
+x = [1,2,3,4]
+y = [4,3,2,1]
+
+5
+from scipy.spatial.distance import cosine
+cosine(x,y)
+
+6
+from scipy.spatial.distance import euclidean
+euclidean(x,y)
+
+7
+#Implementation of Euclidean and Manhatten distance
+
+from math import*
+
+#Euclidean Distance
+def euclidean_dist(x,y):
+    return sqrt(sum(pow(a-b,2) for a, b in zip(x,y)))
+
+#Manhatten Distance
+def manhatten_dist(x,y):
+    return sum(abs(a-b) for a,b in zip(x,y))
+
+# Implementation of Minkowski Distance
+from decimal import Decimal
+
+def nth_root(value, n_root):
+    root_value = 1/float(n_root)
+    return round(Decimal(value)**Decimal(root_value),3)
+
+def minkowski_dist(x,y,p_value):
+    return nth_root(sum(pow(abs(a-b),p_value) for a,b in zip(x,y)),p_value)
+
+8
+#Print Euclidean Distance
+print("Euclidean distance between vector is",euclidean_dist(x,y))
+
+#Print Manhatten Distance
+print("Manhatten distance between vector is",manhatten_dist(x,y))
+
+#Print Euclidean Distance
+print("Minkowski distance between vector is",minkowski_dist(x,y,3))
+
+9
+from sklearn.metrics.pairwise import cosine_similarity
+x = x.reshape(1,-1)
+y = y.reshape(1,-1)
+cosine_similarity(x,y)[0][0]
+
+

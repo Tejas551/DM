@@ -1,0 +1,42 @@
+1.
+import pandas as pd
+import numpy as np
+from sklearn.naive_bayes import GaussianNB
+
+2.
+df = pd.read_csv("prac_4-Copy1.csv pima diebetes.csv")
+
+3.
+df.head()
+
+4.
+df.isnull().sum()
+
+5.
+x = df.drop(["Outcome"], axis=1)
+y = df["Outcome"]
+
+6.
+from sklearn.model_selection import train_test_split
+
+x_train, x_test, y_train, y_test = train_test_split(x,y,test_size=0.3,random_state=2)
+
+
+7.
+NB = GaussianNB()
+
+8.
+NB.fit(x_train,y_train)
+
+9.
+y_pred = NB.predict(x_test)
+
+10.
+from sklearn import metrics
+metrics.accuracy_score(y_test, y_pred)
+
+11.
+test_pred = NB.predict(x_test)
+
+print(metrics.classification_report(y_test, test_pred))
+print(metrics.accuracy_score(y_test, test_pred))

@@ -1,0 +1,75 @@
+1
+#import necessary libraries
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+sns.set(color_codes = True)
+
+2
+#read pima indian diabetes dataset using pandas
+pima = pd.read_csv('/content/diabetes.csv')
+
+3
+#print first five rows of dataset
+pima.head()
+
+4.
+#print shape
+pima.shape
+
+5
+#print datatypes
+pima.dtypes
+
+6
+#check if null values any
+pima.isna().sum()
+
+7
+#how many people have diabetes and how many of them do not
+pima['Outcome'].value_counts()
+
+8
+#plotting bar plot
+plt.figure(figsize=(10,7))
+sns.set(font_scale = 1.5)
+sns.countplot(x = 'Outcome', data=pima, palette="Set2")
+plt.ylabel('Number of People')
+
+9
+#plotting histogram
+pima.hist(figsize = (20,16),grid=True)
+
+10
+#plotting boxplot to identify outliers
+pima.plot(kind= 'box' , subplots=True, layout=(3,3), sharex=False, sharey=False, figsize=(15,15))
+sns.set(font_scale = 1.5)
+
+11
+# Plotting the pie chart
+plt.figure(figsize=(8,8))
+pieC = pima['Outcome'].value_counts()
+explode = (0.05, 0)
+colors = ['moccasin', 'coral']
+labels = ['0 - Non Diabetic', '1 - Diabetic']
+sns.set(font_scale = 1.5)
+plt.pie(pieC, labels = ('0 - Non Diabetic', '1 - Diabetic'), autopct = "%.2f%%", explode = explode, colors = colors)
+plt.legend(labels, loc = 'lower left')
+
+12
+corr=pima.corr()
+
+13
+#plottting heatmap
+plt.figure(figsize=(15,10))
+sns.set(font_scale = 1.5)
+sns.heatmap(corr, annot = True, cmap = 'ocean', vmin = -1, vmax = 1, linecolor='white', linewidths= 1)
+
+14
+#plotting scatterplot
+p=pima.Pregnancies
+o=pima.Outcome
+plt.scatter(p,o)
+plt.show()
